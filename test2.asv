@@ -1,0 +1,36 @@
+function [] = test2(n)
+if ~exist('n','var')
+    n = 100;
+end
+
+start = "Test 2 \nTest ten sprawdza wyniki metody " + ...
+    "dla funkcji o bardzo dużych i bardzo małych wartościach .\n";
+fprintf(start);
+pause;
+
+amount = 6;
+f = cell(1, amount);
+f(1) = {@(x,y)(10000)};
+f(2) = {@(x,y)(x.^3 + 10.*y)};
+f(3) = {@(x,y)(10*sin(x)*cos(7*y))};
+f(4) = {@(x,y)(tan(x*y))};
+f(5) = {@(x,y)(sign(x))};
+fprintf("Funkcje duże: \n")
+for i=1:amount/2
+    tic;
+    val = triang(f{i}, n);
+    t = toc;
+    fprintf("Funkcja %d. f(x,y) = %-30s wynik = %-15d czas: %ds \n", i, char(f{i}), val, t);
+    val = integral2(f{i}, -1, 1, @(x) -abs(x)+1, 1) + integral2(f{i}, -1, 1, 1, @(x) abs(x)+1)
+    pause;
+end
+fprintf("Funkcje małe: \n")
+for i=(amount/2)+1 : amount
+    tic;
+    val = triang(f{i}, n);
+    t = toc;
+    fprintf("Funkcja %d. f(x,y) = %-30s wynik = %-15d czas: %ds \n", i, char(f{i}), val, t);
+    pause;
+end
+end
+
