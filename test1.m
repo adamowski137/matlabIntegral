@@ -1,11 +1,10 @@
+
 function [] = test1(n)
 if ~exist('n','var')
     n = 100;
 end
 
-start = "Test 1 \nTest ten sprawdza czy dla różnych funkcji " + ...
-    "nie parzystych, czyli takich że f(x,y) = -f(-x,-y),\nCałka " + ...
-    "po zadanym obszarze wynosi zero.\n";
+start = "Test 1 \nTest ten sprawdza wyniki metody dla całek wynoszących 0\n";
 fprintf(start);
 pause;
 
@@ -17,10 +16,15 @@ f(3) = {@(x,y)(10*sin(x)*cos(7*y))};
 f(4) = {@(x,y)(tan(x*y))};
 f(5) = {@(x,y)(sign(x))};
 
+fprintf("================================================================\n");
+fprintf("│f(x,y)%*s│wynik%*s│czas%*s│\n", 24,"", 10,"", 9,"");
+fprintf("================================================================\n");
+
 for i=1:amount
     tic;
-    val = triang(f{i}, n);
+    val = P1Z56_AZ_triangInt(f{i}, n);
     t = toc;
-    fprintf("Funkcja %d. f(x,y) = %-30s wynik = %-15d czas: %ds \n", i, char(f{i}), val, t);
+    fprintf("│%-30s│%-15d│%ds│ \n", char(f{i}), val, t);
+    fprintf("----------------------------------------------------------------\n");
     pause;
 end

@@ -4,22 +4,25 @@ if ~exist('n','var')
 end
 
 start = "Test 2 \nTest ten sprawdza wyniki metody " + ...
-    "dla funkcji o bardzo dużych całkach lub " + ...
-    "o całkach rozbieżnych.\n";
+    "dla funkcji o całkach rozbieżnych.\n";
 fprintf(start);
 pause;
 
 amount = 4;
 f = cell(1, amount);
-f(1) = {@(x,y)(10000000)};
-f(2) = {@(x,y)((10*x)^8+(12*y)^6)};
-f(3) = {@(x,y)(exp(1/x))};
-f(4) = {@(x,y)(abs(10*x)^(1/y))};
+f(1) = {@(x,y)(exp(1/x))};
+f(2) = {@(x,y)(2^(1/x)+7^(1/y))};
+f(3) = {@(x,y)(tan(1/x) + tan(1/y))};
+f(4) = {@(x,y)(cos(1/x))};
+fprintf("================================================================\n");
+fprintf("│f(x,y)%*s│wynik%*s│czas%*s│\n", 24,"", 10,"", 9,"");
+fprintf("================================================================\n");
 for i=1:amount
     tic;
-    val = triang(f{i}, n);
+    val = P1Z56_AZ_triangInt(f{i}, n);
     t = toc;
-    fprintf("Funkcja %d. f(x,y) = %-30s wynik = %-15d czas: %ds \n", i, char(f{i}), val, t);
+    fprintf("│%-30s│%-15d│%ds│ \n", char(f{i}), val, t);
+    fprintf("----------------------------------------------------------------\n");
     pause;
 end
 

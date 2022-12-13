@@ -2,11 +2,11 @@ function D = createArea(n)
 % Projekt 1, zadanie 56
 % Adam Żyliński, 320755
 % Wejście:
-% n - współczynnik podziału obaszaru całkowania. Zadany obszar zostanie
-% podzielony na 4*n^2przystających trójkątów.
+%   n - współczynnik podziału obaszaru całkowania. Zadany obszar zostanie
+%   podzielony na 4*n^2przystających trójkątów.
 % Wyjście:
-% D - macierz zawierająca punkty gdzie znajdują sie wierzcholki trójkątów.
-% dim A = (4*n^2, 2, 3)
+%   D - macierz zawierająca punkty gdzie znajdują sie wierzcholki trójkątów.
+%   dim A = (4*n^2, 2, 3)
 
 % tworzymy iterator
 k = 1;
